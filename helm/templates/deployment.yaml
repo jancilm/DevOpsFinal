@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopsfinal
+  labels:
+    app: devops
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: devops
+      environment: production
+  template:
+    metadata:
+      labels:
+        app: devops
+        environment: production
+    spec:
+      containers:
+      - name: devops-container
+        image: jancilm/webimage
